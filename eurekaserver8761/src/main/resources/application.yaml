@@ -1,0 +1,15 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: cloud-eureka-server #应用名称，会在eureka中作为server的唯一ID
+eureka:
+  instance:
+    hostname: CloudEurekaServerA #当前eureka实例的主机名
+  client:
+    service-url:
+      # 客户端与EurekaServer交互的地址，如果是集群，也需要写其它Server的地址
+      # 集群模式下，指向其他的Eureka Server ，如果有更多的实例逗号拼接即可
+      defaultZone: http://CloudEurekaServerB:8762/eureka/
+    register-with-eureka: true # 集群模式下可以改成true
+    fetch-registry: true #集群模式下可以改成true
