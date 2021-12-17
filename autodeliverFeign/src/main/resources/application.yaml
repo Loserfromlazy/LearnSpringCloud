@@ -1,0 +1,40 @@
+server:
+  port: 8071
+#注册到Eureka服务中心
+eureka:
+  client:
+    service-url:
+      # 注册到集群，把多个server地址用逗号连接即可。如果Eureka Server是单实例就写一个就行。
+      defaultZone: http://CloudEurekaServerA:8761/eureka/,http://CloudEurekaServerB:8762/eureka/
+  instance:
+    metadata-map:
+      testkey: testvalue
+      myname: haha
+spring:
+  application:
+    name: autodeliver
+# springboot中暴露健康检查等断点接⼝
+management:
+  endpoints:
+   web:
+    exposure:
+     include: "*"
+  # 暴露健康接⼝的细节
+  endpoint:
+   health:
+    show-details: always
+#针对的被调用的微服务名称,不加就是对所有调用的微服务生效
+user:
+  ribbon:
+    #请求连接超时时间
+    ConnectTimeout: 2000
+    #请求处理超时时间
+    ReadTimeout: 5000
+    #对所有操作都进⾏重试
+    OkToRetryOnAllOperations: true
+    ####根据如上配置，当访问到故障请求的时候，它会再尝试访问1次当前实例（次数由MaxAutoRetries配置），
+    ####如果不⾏，就换⼀个实例进⾏访问，如果还不⾏，再换1次实例访问（更换次数由MaxAutoRetriesNextServer配置），
+    ####如果依然不⾏，返回失败信息。
+    MaxAutoRetries: 0 #对当前选中实例重试次数，不包括第⼀次调⽤
+    MaxAutoRetriesNextServer: 0 #切换实例的重试次数
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #负载策略调整
