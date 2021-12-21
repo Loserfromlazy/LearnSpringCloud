@@ -22,3 +22,5 @@ spring:
           uri: lb://user
           predicates:
             - Path=/user/** # 断言，路径相匹配的进行路由
+           filters:
+             - StripPrefix=1 #去掉第一个路径
