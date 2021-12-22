@@ -13,6 +13,12 @@ eureka:
 spring:
   application:
     name: autodeliver
+  cloud:
+    config:
+      name: test #配置文件名文件名可以配多个逗号分隔
+      profile: dev #后缀名
+      label: master #分支名
+      uri: http://localhost:8050
 # springboot中暴露健康检查等断点接⼝
 management:
   endpoints:

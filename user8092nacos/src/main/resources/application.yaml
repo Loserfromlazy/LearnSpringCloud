@@ -1,0 +1,24 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://121.40.163.78:3306/my_girl?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+# springboot中暴露健康检查等断点接⼝
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # 暴露健康接⼝的细节
+  endpoint:
+    health:
+      show-details: always

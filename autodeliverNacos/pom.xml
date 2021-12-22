@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>autodeliverFeign</artifactId>
+    <artifactId>autodeliverNacos</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,22 +18,23 @@
 
     <dependencies>
         <dependency>
-            <artifactId>common</artifactId>
             <groupId>com.learn</groupId>
+            <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--nacos client客户端-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--feign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-client</artifactId>
-        </dependency>
     </dependencies>
-
 </project>
