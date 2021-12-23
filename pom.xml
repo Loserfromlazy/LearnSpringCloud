@@ -19,6 +19,7 @@
         <module>user8092nacos</module>
         <module>user8093nacos</module>
         <module>autodeliverNacos</module>
+        <module>autodeliverSentinel</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
