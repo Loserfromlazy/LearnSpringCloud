@@ -25,7 +25,11 @@ public class AutoDeliverFeignController {
 
     @GetMapping("/findOpenStatusByUid")
     public Integer findOpenStatusByUid(@RequestParam("uid") Integer uid){
-        //表面上是调用本地方法，实际上feign帮我们拼接url访问远程方法
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         UserInfo userById = userServiceFeignClient.findUserById(uid);
         return userById.getOpen();
     }
