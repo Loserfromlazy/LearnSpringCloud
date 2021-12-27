@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 /**
  * <p>
  * UserController
@@ -18,7 +20,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(){
-        System.out.println("注册成功");
+        System.out.println(new Date()+"注册成功");
         return "注册成功";
     }
 

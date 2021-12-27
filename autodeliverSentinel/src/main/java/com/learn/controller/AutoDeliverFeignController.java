@@ -1,5 +1,7 @@
 package com.learn.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.learn.controller.feign.UserServiceFeignClient;
 import com.learn.pojo.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,25 @@ public class AutoDeliverFeignController {
     private UserServiceFeignClient userServiceFeignClient;
 
     @GetMapping("/findOpenStatusByUid")
-    public Integer findOpenStatusByUid(@RequestParam("uid") Integer uid){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    @SentinelResource(value = "findOpenStatusByUid",
+            blockHandlerClass = SentinelFallback.class,
+            blockHandler = "handleException",
+            fallbackClass = SentinelFallback.class,
+            fallback = "handleError")
+    public Integer findOpenStatusByUid(@RequestParam("uid") Integer uid) {
+//        测试慢比例调用
+//        try {
+//            TimeUnit.SECONDS.sleep(1);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        测试异常熔断
+//        int i = 1/0;
+        System.out.println("请求到这了");
         UserInfo userById = userServiceFeignClient.findUserById(uid);
         return userById.getOpen();
     }
+
+
+
 }
