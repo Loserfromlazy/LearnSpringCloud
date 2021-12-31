@@ -1,46 +1,21 @@
 server:
   port: 8073
+logging:
+  level:
+    com.alibaba.nacos.client.config.impl: WARN
+
 spring:
   application:
     name: autodeliver
   cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-      config:
-        server-addr: 127.0.0.1:8848
-        file-extension: yml
-        namespace: autodeliver
-        extension-configs[0]:
-          data-id: test.yml
-          group: DEFAULT_GROUP
-          refresh: true
-        extension-configs[1]:
-          data-id: test.properties
-          group: DEFAULT_GROUP
-          refresh: true
     sentinel:
       transport:
-        dashboard: 127.0.0.1:8080 #dashboard地址
-        port: 8719 #此端口用于与Sentinel控制台交互，如果8719被占用会依次加一
-      datasource:
-        #flow为自定义的数据源名称
-        flow:
-          nacos:
-            server-addr: ${spring.cloud.nacos.discovery.server-addr}
-            data-id: ${spring.application.name}-flow-rules
-            namespace: public
-            groupId: DEFAULT_GROUP
-            data-type: json
-            rule-type: flow #类型来自RuleType
-        degrade:
-          nacos:
-            server-addr: ${spring.cloud.nacos.discovery.server-addr}
-            data-id: ${spring.application.name}-degrade-rules
-            namespace: public
-            groupId: DEFAULT_GROUP
-            data-type: json
-            rule-type: degrade #类型来自RuleType
+        dashboard: localhost:8080     # sentinel注册地址
+
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
 # springboot中暴露健康检查等断点接口
 management:
   endpoints:

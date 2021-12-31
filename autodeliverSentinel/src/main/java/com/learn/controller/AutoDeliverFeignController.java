@@ -5,6 +5,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.learn.controller.feign.UserServiceFeignClient;
 import com.learn.pojo.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ public class AutoDeliverFeignController {
 
     @Autowired
     private UserServiceFeignClient userServiceFeignClient;
+
 
     @GetMapping("/findOpenStatusByUid")
     @SentinelResource(value = "findOpenStatusByUid",
