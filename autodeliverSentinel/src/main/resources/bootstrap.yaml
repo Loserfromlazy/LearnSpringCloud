@@ -11,7 +11,44 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8080     # sentinel注册地址
-
+      datasource:
+        # 名称随意
+        flow:
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            dataId: ${spring.application.name}-flow-rules
+            namespace: sentinel
+            groupId: SENTINEL_GROUP
+            rule-type: flow  # 规则类型，取值见：org.springframework.cloud.alibaba.sentinel.datasource.RuleType
+        degrade:
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            dataId: ${spring.application.name}-degrade-rules
+            namespace: sentinel
+            groupId: SENTINEL_GROUP
+            rule-type: degrade
+#        system:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}-system-rules
+#            groupId: SENTINEL_GROUP
+#            rule-type: system
+#        authority:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}-authority-rules
+#            groupId: SENTINEL_GROUP
+#            rule-type: authority
+#        param-flow:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}-param-flow-rules
+#            groupId: SENTINEL_GROUP
+#            rule-type: param-flow
     nacos:
       discovery:
         server-addr: localhost:8848
