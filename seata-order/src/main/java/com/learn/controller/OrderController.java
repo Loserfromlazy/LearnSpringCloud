@@ -1,7 +1,10 @@
 package com.learn.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.learn.entity.Order;
+import com.learn.entity.Result;
+import com.learn.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -14,4 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+
+    @Autowired
+    OrderService orderService;
+
+    @PostMapping("/addOrder")
+    public Result<Boolean> addOrder(@RequestBody Order order){
+        return orderService.addOrder(order);
+    }
 }

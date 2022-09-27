@@ -1,0 +1,13 @@
+server:
+  port: 8075
+spring:
+  application:
+    name: seata-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+# 开启Feign的熔断功能
+feign:
+  hystrix:
+    enabled: true

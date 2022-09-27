@@ -1,18 +1,18 @@
 package com.learn.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.learn.entity.Order;
+import com.learn.entity.Goods;
 import com.learn.entity.Result;
 
 /**
  * <p>
- * OderService
+ * UserService
  * </p>
  *
  * @author Yuhaoran
  * @since 2022/9/27
  */
-public interface OrderService extends IService<Order> {
+public interface GoodsService extends IService<Goods> {
 
-    Result<Boolean> addOrder(Order order);
+    Result<Boolean> reduceGoods(Integer id, Integer nums);
 }

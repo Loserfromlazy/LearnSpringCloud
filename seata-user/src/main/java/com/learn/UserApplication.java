@@ -18,9 +18,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients //开启Feign客户端功能
 @MapperScan("com.learn.mapper")
-public class OrderApplication {
+public class UserApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderApplication.class,args);
+        SpringApplication.run(UserApplication.class,args);
     }
 }

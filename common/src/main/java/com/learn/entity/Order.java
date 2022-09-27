@@ -24,6 +24,8 @@ public class Order {
     private String name;
     //商品id
     private Integer goodsId;
+    //用户id
+    private Integer userId;
     //商品数量
     private Integer nums;
     //商品金额

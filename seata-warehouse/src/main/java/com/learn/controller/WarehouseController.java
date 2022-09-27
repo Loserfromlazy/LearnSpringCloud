@@ -1,7 +1,7 @@
 package com.learn.controller;
 
 import com.learn.entity.Result;
-import com.learn.service.UserService;
+import com.learn.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022/9/27
  */
 @RestController
-@RequestMapping("/user")
-public class UserController {
-    @Autowired
-    UserService userService;
+@RequestMapping("/warehouse")
+public class WarehouseController {
 
-    @GetMapping("/addPoints")
-    public Result<Boolean> addPoints(@RequestParam("id") Integer id, @RequestParam("points") Integer points) {
-        return userService.addPoints(id, points);
+    @Autowired
+    GoodsService goodsService;
+
+    @GetMapping("reduceGoods")
+    public Result<Boolean> reduceGoods(@RequestParam("id") Integer id,@RequestParam("nums") Integer nums){
+        return goodsService.reduceGoods(id, nums);
     }
 }

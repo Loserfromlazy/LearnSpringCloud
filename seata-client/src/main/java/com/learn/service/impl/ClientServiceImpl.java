@@ -1,12 +1,17 @@
 package com.learn.service.impl;
 
+import com.learn.entity.Order;
+import com.learn.entity.Result;
 import com.learn.service.ClientService;
-import feign.OrderFeign;
-import feign.UserFeign;
-import feign.WarehouseFeign;
+import com.learn.feign.OrderFeign;
+import com.learn.feign.UserFeign;
+import com.learn.feign.WarehouseFeign;
+import com.learn.utils.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -30,7 +35,25 @@ public class ClientServiceImpl implements ClientService {
     WarehouseFeign warehouseFeign;
 
     @Override
-    public void buy(Integer num, Integer userId, Integer goodsId) {
-
+    public Result<Boolean> buy(Integer num, Integer userId, Integer goodsId) {
+        Order order = new Order();
+        order.setGoodsId(goodsId);
+        order.setName("购买商品"+goodsId);
+        order.setUserId(userId);
+        order.setNums(num);
+        order.setCreateTime(new Date());
+        Result<Boolean> result = orderFeign.addOrder(order);
+        if (!result.getResult()){
+            return ResultUtils.resultInit(0,"购买失败，原因"+result.getMsg(),false);
+        }
+        Result<Boolean> result1 = userFeign.addPoints(userId, num);
+        if (!result1.getResult()){
+            return ResultUtils.resultInit(0,"购买失败，原因"+result1.getMsg(),false);
+        }
+        Result<Boolean> result2 = warehouseFeign.reduceGoods(goodsId, num);
+        if (!result2.getResult()){
+            return ResultUtils.resultInit(0,"购买失败，原因"+result2.getMsg(),false);
+        }
+        return ResultUtils.successBuild(true);
     }
 }

@@ -1,5 +1,7 @@
 package com.learn.service;
 
+import com.learn.entity.Result;
+
 /**
  * <p>
  * ClientService
@@ -19,5 +21,5 @@ public interface ClientService {
      * @author Yuhaoran
      * @date 2022/9/26 15:51
      */
-    void buy(Integer num, Integer userId, Integer goodsId);
+    Result<Boolean> buy(Integer num, Integer userId, Integer goodsId);
 }

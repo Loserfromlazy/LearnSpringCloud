@@ -1,15 +1,15 @@
 server:
-  port: 8076
+  port: 8078
 spring:
   application:
-    name: seata-order
+    name: seata-warehouse
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.40.163.78:3306/seata_order?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://121.40.163.78:3306/seata_warehouse?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 123456
 # 开启Feign的熔断功能

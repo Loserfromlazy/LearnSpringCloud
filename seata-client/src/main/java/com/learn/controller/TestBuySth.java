@@ -1,5 +1,6 @@
 package com.learn.controller;
 
+import com.learn.entity.Result;
 import com.learn.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +23,12 @@ public class TestBuySth {
     ClientService clientService;
 
     @GetMapping("/testBuy1")
-    public void testBuy1() {
-
+    public Result<Boolean> testBuy1() {
+        return clientService.buy(10,1,1);
     }
 
     @GetMapping("/testBuy2")
-    public void testBuy2() {
-
+    public Result<Boolean> testBuy2() {
+        return clientService.buy(100,1,1);
     }
 }
