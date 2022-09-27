@@ -1,0 +1,87 @@
+server:
+  port: 8073
+logging:
+  level:
+    com.alibaba.nacos.client.config.impl: WARN
+
+spring:
+  application:
+    name: autodeliver
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:9090     # sentinel注册地址
+        port: 8721
+      datasource:
+        # 名称随意
+        flow:
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            dataId: ${spring.application.name}-flow-rules
+            namespace: sentinel
+            groupId: SENTINEL_GROUP
+            rule-type: flow  # 规则类型，取值见：org.springframework.cloud.alibaba.sentinel.datasource.RuleType
+        degrade:
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            dataId: ${spring.application.name}-degrade-rules
+            namespace: sentinel
+            groupId: SENTINEL_GROUP
+            rule-type: degrade
+      #关闭context，就可以让controller里的方法单独成为一个链路；
+      #不关闭context的话，controller里的方法都会默认进去sentinel默认的根链路里，这样就只有一条链路，无法流控链路模式
+      web-context-unify: false
+
+    #        system:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}-system-rules
+#            groupId: SENTINEL_GROUP
+#            rule-type: system
+#        authority:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}-authority-rules
+#            groupId: SENTINEL_GROUP
+#            rule-type: authority
+#        param-flow:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}-param-flow-rules
+#            groupId: SENTINEL_GROUP
+#            rule-type: param-flow
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+# springboot中暴露健康检查等断点接口
+management:
+  endpoints:
+   web:
+    exposure:
+     include: "*"
+  # 暴露健康接⼝的细节
+  endpoint:
+   health:
+    show-details: always
+#针对的被调用的微服务名称,不加就是对所有调用的微服务生效
+user:
+  ribbon:
+    #请求连接超时时间
+    ConnectTimeout: 2000
+    #请求处理超时时间
+    ReadTimeout: 8000
+    #对所有操作都进行重试
+    OkToRetryOnAllOperations: true
+    ####根据如上配置，当访问到故障请求的时候，它会再尝试访问1次当前实例（次数由MaxAutoRetries配置），
+    ####如果不行，就换一个实例进行访问，如果还不行，再换1次实例访问（更换次数由MaxAutoRetriesNextServer配置），
+    ####如果依然不行，返回失败信息。
+    MaxAutoRetries: 0 #对当前选中实例重试次数，不包括第一次调用
+    MaxAutoRetriesNextServer: 0 #切换实例的重试次数
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #负载策略调整
+
+

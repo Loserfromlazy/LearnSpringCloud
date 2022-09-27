@@ -1,0 +1,16 @@
+#注册到Eureka服务中心
+eureka:
+  client:
+    service-url:
+      # 注册到集群，把多个server地址用逗号连接即可。如果Eureka Server是单实例就写一个就行。
+      defaultZone: http://CloudEurekaServerA:8761/eureka/,http://CloudEurekaServerB:8762/eureka/
+spring:
+  application:
+    name: user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+server:
+  port: 8091

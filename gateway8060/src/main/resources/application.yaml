@@ -1,0 +1,26 @@
+server:
+  port: 8060
+#注册到Eureka服务中心
+eureka:
+  client:
+    service-url:
+      # 注册到集群，把多个server地址用逗号连接即可。如果Eureka Server是单实例就写一个就行。
+      defaultZone: http://CloudEurekaServerA:8761/eureka/,http://CloudEurekaServerB:8762/eureka/
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: cloud-autodeliver # 路由的id,没有规定规则但要求唯一,建议配合服务名
+          #匹配后提供服务的路由地址
+          uri: lb://autodeliver
+          predicates:
+            - Path=/autoDeliverFeign/** # 断言，路径相匹配的进行路由
+        - id: cloud-user # 路由的id,没有规定规则但要求唯一,建议配合服务名
+          #匹配后提供服务的路由地址
+          uri: lb://user
+          predicates:
+            - Path=/user/** # 断言，路径相匹配的进行路由
+          filters:
+            - StripPrefix=1 #去掉第一个路径

@@ -1,0 +1,31 @@
+server:
+  port: 8050
+#注册到Eureka服务中心
+eureka:
+  client:
+    service-url:
+      # 注册到集群，把多个server地址用逗号连接即可。如果Eureka Server是单实例就写一个就行。
+      defaultZone: http://CloudEurekaServerA:8761/eureka/,http://CloudEurekaServerB:8762/eureka/
+spring:
+  application:
+    name: serverconfig
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/yhr520/config-server.git
+          username: ****
+          password: ****
+          search-paths:
+            - config-server
+      label: master
+# springboot中暴露健康检查等断点接⼝
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # 暴露健康接⼝的细节
+  endpoint:
+    health:
+      show-details: always

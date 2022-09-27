@@ -1,0 +1,27 @@
+server:
+  port: 8075
+spring:
+  application:
+    name: seata_order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/seate_order?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: manager
+# 开启Feign的熔断功能
+feign:
+  hystrix:
+   enabled: true
+#配置hystrix的超时时长
+hystrix:
+ command:
+  default:
+   execution:
+    isolation:
+     thread:
+      timeoutInMilliseconds: 8000
+
