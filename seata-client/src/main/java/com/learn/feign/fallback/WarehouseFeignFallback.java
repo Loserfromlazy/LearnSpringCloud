@@ -24,7 +24,8 @@ public class WarehouseFeignFallback implements FallbackFactory<WarehouseFeign> {
         return new WarehouseFeign() {
             @Override
             public Result<Boolean> reduceGoods(Integer id, Integer nums) {
-                return ResultUtils.resultInit(0, cause.getMessage(), false);
+                throw new RuntimeException("进入到reduceGoods的降级方法，抛出异常，便于seata回滚");
+//                return ResultUtils.resultInit(0, cause.getMessage(), false);
             }
         };
     }

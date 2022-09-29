@@ -25,6 +25,7 @@ public class OrderFeignFallback implements FallbackFactory<OrderFeign> {
         return new OrderFeign() {
             @Override
             public Result<Boolean> addOrder(Order order) {
+//                throw new RuntimeException("进入到addOrder的降级方法，抛出异常，便于seata回滚");
                 return ResultUtils.resultInit(0,cause.getMessage(),false);
             }
         };

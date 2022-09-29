@@ -1,6 +1,8 @@
 server:
   port: 8076
 spring:
+  autoconfigure:
+    exclude: com.alibaba.cloud.seata.feign.SeataFeignClientAutoConfiguration
   application:
     name: seata-order
   cloud:
@@ -24,4 +26,23 @@ hystrix:
     isolation:
      thread:
       timeoutInMilliseconds: 8000
+
+seata:
+  application-id: ${spring.application.name}
+  enable-auto-data-source-proxy: true
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      # 微服务必须在一个组，否则服务发现不了，但Seata-server 可以在不同的组中
+      dataId: "seataServer.properties"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
 

@@ -7,6 +7,7 @@ import com.learn.feign.OrderFeign;
 import com.learn.feign.UserFeign;
 import com.learn.feign.WarehouseFeign;
 import com.learn.utils.ResultUtils;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class ClientServiceImpl implements ClientService {
     WarehouseFeign warehouseFeign;
 
     @Override
+    @GlobalTransactional(rollbackFor = Exception.class)
     public Result<Boolean> buy(Integer num, Integer userId, Integer goodsId) {
         Order order = new Order();
         order.setGoodsId(goodsId);

@@ -24,6 +24,7 @@ public class UserFeignFallback implements FallbackFactory<UserFeign> {
         return new UserFeign() {
             @Override
             public Result<Boolean> addPoints(Integer id, Integer points) {
+//                throw new RuntimeException("进入到addPoints的降级方法，抛出异常，便于seata回滚");
                 return ResultUtils.resultInit(0,cause.getMessage(),false);
             }
         };
