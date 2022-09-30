@@ -1,28 +1,30 @@
 server:
   port: 8075
 spring:
-  autoconfigure:
-    exclude: com.alibaba.cloud.seata.feign.SeataFeignClientAutoConfiguration
   application:
     name: seata-client
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/seata_client?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
 # 开启Feign的熔断功能
 feign:
   hystrix:
     enabled: true
 seata:
   application-id: ${spring.application.name}
-  enable-auto-data-source-proxy: false
+  enable-auto-data-source-proxy: true
   config:
     type: nacos
     nacos:
       server-addr: 127.0.0.1:8848
       username: nacos
       password: nacos
-      # 微服务必须在一个组，否则服务发现不了，但Seata-server 可以在不同的组中
       dataId: "seataServer.properties"
   registry:
     type: nacos
@@ -31,3 +33,5 @@ seata:
       server-addr: 127.0.0.1:8848
       username: nacos
       password: nacos
+  data-source-proxy-mode: AT
+  enabled: true
