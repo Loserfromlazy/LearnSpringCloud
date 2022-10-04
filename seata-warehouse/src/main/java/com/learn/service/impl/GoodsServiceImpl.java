@@ -31,14 +31,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         Goods goods = new Goods();
         goods.setId(id);
         int nowNums = goodsSelect.getNums() - nums;
-        if (nowNums<0){
+        if (nowNums < 0) {
             log.error("库存不够，无法购买");
             throw new RuntimeException("库存不足");
 //            return ResultUtils.resultInit(0,"库存不够，无法购买",false);
         }
         goods.setNums(nowNums);
         int updateById = goodsMapper.updateById(goods);
-        if (updateById<0){
+        if (updateById < 0) {
             throw new RuntimeException("更新库存失败");
 //            return ResultUtils.resultInit(0,"更新库存失败",false);
         }
