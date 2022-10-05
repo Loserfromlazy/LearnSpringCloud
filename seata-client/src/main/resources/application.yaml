@@ -16,9 +16,18 @@ spring:
 feign:
   hystrix:
     enabled: true
+#配置熔断的时间监听
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 5000
 seata:
   application-id: ${spring.application.name}
-  enable-auto-data-source-proxy: true
+  enable-auto-data-source-proxy: false
   config:
     type: nacos
     nacos:
@@ -33,5 +42,5 @@ seata:
       server-addr: 127.0.0.1:8848
       username: nacos
       password: nacos
-  data-source-proxy-mode: AT
+  #data-source-proxy-mode: AT
   enabled: true

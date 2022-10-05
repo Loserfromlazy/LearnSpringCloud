@@ -25,4 +25,6 @@ public class Goods {
     private Integer money;
     //库存
     private Integer nums;
+    //中间库存
+    private Integer seataNums;
 }

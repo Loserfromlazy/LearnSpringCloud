@@ -3,6 +3,7 @@ package com.learn.controller;
 import com.learn.entity.Order;
 import com.learn.entity.Result;
 import com.learn.service.OrderService;
+import com.learn.service.OrderTCCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
 
     @Autowired
-    OrderService orderService;
-
+//    OrderService orderService;
+    OrderTCCService orderService;
     @PostMapping("/addOrder")
     public Result<Boolean> addOrder(@RequestBody Order order){
         return orderService.addOrder(order);

@@ -23,4 +23,6 @@ public class User {
     private String name;
     //用户积分
     private Integer point;
+
+    private Integer seataPoint;
 }

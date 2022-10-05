@@ -27,7 +27,7 @@ hystrix:
 
 seata:
   application-id: ${spring.application.name}
-  enable-auto-data-source-proxy: true
+  enable-auto-data-source-proxy: false
   config:
     type: nacos
     nacos:
@@ -43,5 +43,5 @@ seata:
       server-addr: 127.0.0.1:8848
       username: nacos
       password: nacos
-  data-source-proxy-mode: AT
+  #data-source-proxy-mode: AT
   enabled: true

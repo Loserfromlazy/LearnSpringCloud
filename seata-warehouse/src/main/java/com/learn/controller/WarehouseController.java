@@ -2,6 +2,7 @@ package com.learn.controller;
 
 import com.learn.entity.Result;
 import com.learn.service.GoodsService;
+import com.learn.service.GoodsTCCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WarehouseController {
 
     @Autowired
-    GoodsService goodsService;
-
+//    GoodsService goodsService;
+    GoodsTCCService goodsService;
     @GetMapping("reduceGoods")
     public Result<Boolean> reduceGoods(@RequestParam("id") Integer id,@RequestParam("nums") Integer nums){
         return goodsService.reduceGoods(id, nums);

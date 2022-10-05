@@ -44,6 +44,8 @@ public class ClientServiceImpl implements ClientService {
         order.setUserId(userId);
         order.setNums(num);
         order.setCreateTime(new Date());
+        //TCC模式测试用例需要手动设置id，不然无法获取自增主键，也可以新增别的唯一索引字段用于区分，这里为了简单所以手动设置id
+        order.setId(1);
         Result<Boolean> result = orderFeign.addOrder(order);
         if (!result.getResult()){
             return ResultUtils.resultInit(0,"购买失败，原因"+result.getMsg(),false);

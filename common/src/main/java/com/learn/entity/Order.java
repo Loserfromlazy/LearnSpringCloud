@@ -18,7 +18,7 @@ import java.util.Date;
 @Data
 @TableName("tb_order")
 public class Order {
-    @TableId(type = IdType.AUTO)
+    //@TableId(type = IdType.AUTO)
     private Integer id;
     //订单名称
     private String name;
@@ -34,4 +34,6 @@ public class Order {
     private String address;
     //下单时间
     private Date createTime;
+    //订单状态 0为不可用，事务未提交 1为可用，事务已经提交
+    private Integer status;
 }
